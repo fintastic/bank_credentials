@@ -6,6 +6,8 @@ Bankster::BankCredentials is a tiny wrapper for keeping together bank credential
 - [Usage with Ebics credentials](#ebics-credentials)
 - [Usage with Hbci credentials](#hbci-credentials)
 
+[![Build Status](https://travis-ci.org/bankster/bankster-bank_credentials.svg?branch=master)](https://travis-ci.org/bankster/bankster-bank_credentials)
+
 ## Installation
 
 Add this line to your application's Gemfile:
