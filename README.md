@@ -2,6 +2,10 @@
 
 Bankster::BankCredentials is a tiny wrapper for keeping together bank credentials for HBCI or Ebics. 
 
+- [Installation](#installation)
+- [Usage with Ebics credentials](#ebics-credentials)
+- [Usage with Hbci credentials](#hbci-credentials)
+
 ## Installation
 
 Add this line to your application's Gemfile:
