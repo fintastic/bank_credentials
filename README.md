@@ -91,7 +91,7 @@ credential_hash = {
   url:        "url",
   bank_code:  "bank_code",
   user_id:    "user_id",
-  pin: "pin",
+  pin:        "pin"
 }
 
 credentials = Bankster::BankCredentials::Hbci.new(credential_hash)
