@@ -1,69 +1,7 @@
 require 'spec_helper'
 
 describe Bankster::BankCredentials::Ebics do
-  let(:credential_hash) do
-    {
-      key: "key",
-      passphrase: "passphrase",
-      url: "url",
-      host_id: "host_id",
-      user_id: "user_id",
-      partner_id: "partner_id"
-    }
-  end
-
-  describe '.from_encoded_json' do
-    context 'given valid credentials' do
-      let(:encoded_json) { Base64.encode64(credential_hash.to_json) }
-
-      it 'returns a described_class instance' do
-        expect(described_class.from_encoded_json(encoded_json)).to be_a(described_class)
-      end
-
-      it 'initializes the described_class with the credential hash' do
-        expect(described_class).to receive(:new).with(credential_hash)
-
-        described_class.from_encoded_json(encoded_json)
-      end
-    end
-
-    context 'given nil' do
-      let(:encoded_json) { nil }
-
-      it 'raises an error' do
-        expect{described_class.from_encoded_json(encoded_json)}.
-          to raise_error(Bankster::BankCredentials::Errors::Empty)
-      end
-    end
-
-    context 'given an empty string' do
-      let(:encoded_json) { "" }
-
-      it 'raises an error' do
-        expect{described_class.from_encoded_json(encoded_json)}.
-          to raise_error(Bankster::BankCredentials::Errors::Empty)
-      end
-    end
-
-    context 'given unparseable json' do
-      let(:encoded_json) { "asd" }
-
-      it 'raises an error' do
-        expect{described_class.from_encoded_json(encoded_json)}.
-          to raise_error(Bankster::BankCredentials::Errors::Invalid)
-      end
-    end
-
-    context 'given a hash' do
-      let(:encoded_json) { {a: "asd"}  }
-
-      it 'raises an error' do
-        expect{described_class.from_encoded_json(encoded_json)}.
-          to raise_error(Bankster::BankCredentials::Errors::Invalid)
-      end
-    end
-  end
-
+  let(:credential_hash) { valid_ebics_credentials }
 
   describe 'attribute readers' do
     subject { described_class.new(credential_hash) }
@@ -94,7 +32,7 @@ describe Bankster::BankCredentials::Ebics do
     it 'raises an error when one of the keys is missing' do
       [:key, :passphrase, :user_id, :host_id, :partner_id, :url].each do |key|
         subject = described_class.new(credential_hash.merge!({key => nil}), validate: false)
-        expect{ subject.validate! }.to raise_error(Bankster::BankCredentials::Errors::Invalid)
+        expect{ subject.validate! }.to raise_error(Bankster::BankCredentials::Ebics::Errors::Invalid)
       end
     end
   end

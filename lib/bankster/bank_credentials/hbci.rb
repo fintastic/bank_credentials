@@ -1,14 +1,24 @@
 module Bankster
   module BankCredentials
     class Hbci < Base
-      def_delegators :@credentials, :url, :url=
-      def_delegators :@credentials, :bank_code, :bank_code=
-      def_delegators :@credentials, :user_id, :user_id=
-      def_delegators :@credentials, :pin, :pin=
+      module Errors
+        class Invalid < StandardError
+          def to_s
+            'Invalid HBCI credentials'
+          end
+        end
 
-      def keys
-        [:url, :bank_code, :user_id, :pin]
+        class Empty < StandardError
+          def to_s
+            'Empty HBCI Credentials'
+          end
+        end
       end
+
+      attribute :url
+      attribute :bank_code
+      attribute :user_id
+      attribute :pin
     end
   end
 end
