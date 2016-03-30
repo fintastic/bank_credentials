@@ -5,6 +5,10 @@ module Bankster
       attr_reader :credentials
       def_delegator :credentials, :to_h
 
+      def self.type
+        name.nil? ? 'base' : name.split('::').last.downcase 
+      end
+
       def self.attributes
         @attributes = [] if @attributes.nil?
         @attributes
@@ -19,6 +23,7 @@ module Bankster
 
 
       def initialize(credential_hash, options = {})
+        credential_hash[:type] = credential_hash[:type] || self.class.type || nil
         @credentials = OpenStruct.new(credential_hash)
         validate! unless !options[:validate]
       end
@@ -40,6 +45,8 @@ module Bankster
       def validate!
         raise self.class::Errors::Invalid unless valid?
       end
+
+      attribute :type
     end
   end
 end

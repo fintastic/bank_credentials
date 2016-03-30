@@ -7,7 +7,9 @@ module Bankster
         raise Errors::Invalid if !encoded_json.is_a?(String)
 
         credentials = JSON.parse(Base64.decode64(encoded_json), symbolize_names: true)
+
         class_for_type(credentials[:type]).new(credentials)
+
       rescue JSON::ParserError
         raise Errors::Invalid
       end

@@ -4,13 +4,13 @@ module Bankster
       module Errors
         class Invalid < StandardError
           def to_s
-            'Invalid HBCI credentials'
+            'Invalid Hbci credentials'
           end
         end
 
         class Empty < StandardError
           def to_s
-            'Empty HBCI Credentials'
+            'Empty Hbci credentials'
           end
         end
       end

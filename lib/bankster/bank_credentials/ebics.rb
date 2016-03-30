@@ -1,7 +1,6 @@
 module Bankster
   module BankCredentials
     class Ebics < Base
-
       attribute :key
       attribute :passphrase
       attribute :user_id
@@ -12,13 +11,13 @@ module Bankster
       module Errors
         class Invalid < StandardError
           def to_s
-            'Invalid ebics credentials'
+            "Invalid Ebics credentials"
           end
         end
 
         class Empty < StandardError
           def to_s
-            'Empty Ebics Credentials'
+            'Empty Ebics credentials'
           end
         end
       end

@@ -3,8 +3,11 @@ require 'bankster/bank_credentials'
 require 'byebug'
 
 def valid_ebics_credentials
+  valid_ebics_credentials_with_type
+end
+
+def valid_ebics_credentials_without_type
   {
-    type:       'ebics',
     key:        'key',
     passphrase: 'passphrase',
     url:        'url',
@@ -14,12 +17,23 @@ def valid_ebics_credentials
   }
 end
 
+def valid_ebics_credentials_with_type
+  valid_ebics_credentials_without_type.merge(type: 'ebics')
+end
+
 def valid_hbci_credentials
+  valid_hbci_credentials_with_type
+end
+
+def valid_hbci_credentials_without_type
   {
-    type:      'hbci',
     url:       'url',
     bank_code: 'bank_code',
     user_id:   'user_id',
     pin:       'pin'
   }
+end
+
+def valid_hbci_credentials_with_type
+  valid_hbci_credentials_without_type.merge(type: 'hbci')
 end
