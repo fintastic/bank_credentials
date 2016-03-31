@@ -1,6 +1,13 @@
 module Bankster
   module BankCredentials
     class Factory
+      def self.from_hash(credentials)
+        raise Errors::Invalid if !credentials.is_a?(Hash)
+        raise Errors::Invalid if !credentials.has_key?(:type)
+
+        class_for_type(credentials[:type]).new(credentials)
+      end
+
       def self.from_encoded_json(encoded_json)
         raise Errors::Invalid if encoded_json.nil? 
         raise Errors::Invalid if encoded_json.empty? 

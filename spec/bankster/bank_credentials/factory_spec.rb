@@ -2,6 +2,45 @@ require 'spec_helper'
 
 describe Bankster::BankCredentials::Factory do
 
+  describe '.from_hash' do
+    subject { described_class.from_hash(credentials) }
+    context 'given a valid hbci credential hash' do
+      let(:credentials) { valid_hbci_credentials_with_type }
+
+      it { is_expected.to be_a(Bankster::BankCredentials::Hbci) }
+    end
+
+    context 'given a valid hbci credential hash without type' do
+      let(:credentials) { valid_hbci_credentials_without_type }
+
+      specify { expect { subject }.to raise_error(Bankster::BankCredentials::Errors::Invalid) }
+    end
+
+    context 'given a valid ebics credential hash without type' do
+      let(:credentials) { valid_ebics_credentials_without_type }
+
+      specify { expect { subject }.to raise_error(Bankster::BankCredentials::Errors::Invalid) }
+    end
+
+    context 'given a valid hbci credential hash' do
+      let(:credentials) { valid_ebics_credentials_with_type }
+
+      it { is_expected.to be_a(Bankster::BankCredentials::Ebics) }
+    end
+
+    context 'given an empty hash' do
+      let(:credentials) { {} }
+
+      specify { expect { subject }.to raise_error(Bankster::BankCredentials::Errors::Invalid) }
+    end
+
+    context 'given nil' do
+      let(:credentials) { nil }
+
+      specify { expect { subject }.to raise_error(Bankster::BankCredentials::Errors::Invalid) }
+    end
+  end
+
   describe '.from_encoded_json' do
     let(:encoded_json) { Base64.encode64(credential_hash.to_json) }
 
