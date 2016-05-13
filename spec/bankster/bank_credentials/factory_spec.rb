@@ -42,7 +42,7 @@ describe Bankster::BankCredentials::Factory do
   end
 
   describe '.from_encoded_json' do
-    let(:encoded_json) { Base64.encode64(credential_hash.to_json) }
+    let(:encoded_json) { Base64.urlsafe_encode64(credential_hash.to_json) }
 
     context 'given a valid ebics credential hash' do
       let(:credential_hash) { valid_ebics_credentials }
