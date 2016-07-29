@@ -68,6 +68,16 @@ describe Bankster::BankCredentials::Hbci do
     end
   end
 
+  describe '#encode' do
+    subject { described_class.new(credential_hash).encode }
+
+    it 'returns the ursafe base64 encoded string' do
+      expect(subject).to eql(
+        Base64.urlsafe_encode64(described_class.new(credential_hash).to_json)
+      )
+    end
+  end
+
   describe described_class::Errors do
     describe described_class::Empty do
       describe '#to_s' do

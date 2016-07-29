@@ -21,7 +21,6 @@ module Bankster
         def_delegator :@credentials, "#{attribute}=".to_sym
       end
 
-
       def initialize(credential_hash, options = {})
         credential_hash[:type] = credential_hash[:type] || self.class.type || nil
         @credentials = OpenStruct.new(credential_hash)
@@ -30,6 +29,10 @@ module Bankster
 
       def to_json
         to_h.to_json
+      end
+
+      def encode
+        Base64.urlsafe_encode64(to_json)
       end
 
       def attributes

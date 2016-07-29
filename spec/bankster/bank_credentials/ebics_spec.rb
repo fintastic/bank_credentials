@@ -29,6 +29,16 @@ describe Bankster::BankCredentials::Ebics do
     end
   end
 
+  describe '#encode' do
+    subject { described_class.new(credential_hash).encode }
+
+    it 'returns the ursafe base64 encoded string' do
+      expect(subject).to eql(
+        Base64.urlsafe_encode64(described_class.new(credential_hash).to_json)
+      )
+    end
+  end
+
   describe 'validate!' do
     it 'raises an error when one of the keys is missing' do
       [:key, :passphrase, :user_id, :host_id, :partner_id, :url].each do |key|
