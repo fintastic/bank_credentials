@@ -6,7 +6,7 @@ def valid_ebics_credentials_without_type
   {
     key:        'key',
     passphrase: 'passphrase',
-    url:        'url',
+    url:        'https://localhost',
     host_id:    'host_id',
     user_id:    'user_id',
     partner_id: 'partner_id'
