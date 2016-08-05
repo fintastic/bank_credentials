@@ -1,24 +1,24 @@
+# frozen_string_literal: true
 require 'spec_helper'
 
 describe Bankster::BankCredentials::Hbci do
-
   let(:credential_hash) { valid_hbci_credentials_without_type }
 
   describe 'attribute readers' do
     subject { described_class.new(credential_hash) }
 
     it 'provides public access to the credentials' do
-      expect(subject.url).to eql("url")
-      expect(subject.bank_code).to eql("bank_code")
-      expect(subject.user_id).to eql("user_id")
-      expect(subject.pin).to eql("pin")
+      expect(subject.url).to eql('url')
+      expect(subject.bank_code).to eql('bank_code')
+      expect(subject.user_id).to eql('user_id')
+      expect(subject.pin).to eql('pin')
     end
   end
 
   describe '#valid?' do
     it 'returns false when one of the keys is missing' do
       [:url, :bank_code, :user_id, :pin].each do |key|
-        expect(described_class.new(credential_hash.merge!({key => nil}))).to_not be_valid
+        expect(described_class.new(credential_hash.merge!(key => nil))).to_not be_valid
       end
     end
 
@@ -30,8 +30,8 @@ describe Bankster::BankCredentials::Hbci do
   describe 'validate!' do
     it 'raises an error when one of the keys is missing' do
       [:url, :bank_code, :user_id, :pin].each do |key|
-        subject = described_class.new(credential_hash.merge!({key => nil}), validate: false)
-        expect{ subject.validate! }.to raise_error(Bankster::BankCredentials::Hbci::Errors::Invalid)
+        subject = described_class.new(credential_hash.merge!(key => nil), validate: false)
+        expect { subject.validate! }.to raise_error(Bankster::BankCredentials::Hbci::Errors::Invalid)
       end
     end
   end

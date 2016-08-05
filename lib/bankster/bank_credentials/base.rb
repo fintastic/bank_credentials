@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Bankster
   module BankCredentials
     class Base
@@ -6,7 +7,7 @@ module Bankster
       def_delegator :credentials, :to_h
 
       def self.type
-        name.nil? ? 'base' : name.split('::').last.downcase 
+        name.nil? ? 'base' : name.split('::').last.downcase
       end
 
       def self.attributes
@@ -24,7 +25,7 @@ module Bankster
       def initialize(credential_hash, options = {})
         credential_hash[:type] = credential_hash[:type] || self.class.type || nil
         @credentials = OpenStruct.new(credential_hash)
-        validate! unless !options[:validate]
+        validate! if options[:validate]
       end
 
       def to_json

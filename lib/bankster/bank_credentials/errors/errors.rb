@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Bankster
   module BankCredentials
     module Errors
@@ -12,4 +13,3 @@ module Bankster
     end
   end
 end
-

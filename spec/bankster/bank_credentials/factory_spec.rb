@@ -1,7 +1,7 @@
+# frozen_string_literal: true
 require 'spec_helper'
 
 describe Bankster::BankCredentials::Factory do
-
   describe '.from_hash' do
     subject { described_class.from_hash(credentials) }
     context 'given a valid hbci credential hash' do
@@ -76,35 +76,35 @@ describe Bankster::BankCredentials::Factory do
       let(:encoded_json) { nil }
 
       it 'raises an error' do
-        expect{described_class.from_encoded_json(encoded_json)}.
-          to raise_error(Bankster::BankCredentials::Errors::Invalid)
+        expect { described_class.from_encoded_json(encoded_json) }
+          .to raise_error(Bankster::BankCredentials::Errors::Invalid)
       end
     end
 
     context 'given an empty string' do
-      let(:encoded_json) { "" }
+      let(:encoded_json) { '' }
 
       it 'raises an error' do
-        expect{described_class.from_encoded_json(encoded_json)}.
-          to raise_error(Bankster::BankCredentials::Errors::Invalid)
+        expect { described_class.from_encoded_json(encoded_json) }
+          .to raise_error(Bankster::BankCredentials::Errors::Invalid)
       end
     end
 
     context 'given unparseable json' do
-      let(:encoded_json) { "asd" }
+      let(:encoded_json) { 'asd' }
 
       it 'raises an error' do
-        expect{described_class.from_encoded_json(encoded_json)}.
-          to raise_error(Bankster::BankCredentials::Errors::Invalid)
+        expect { described_class.from_encoded_json(encoded_json) }
+          .to raise_error(Bankster::BankCredentials::Errors::Invalid)
       end
     end
 
     context 'given a hash' do
-      let(:encoded_json) { {a: "asd"}  }
+      let(:encoded_json) { { a: 'asd' } }
 
       it 'raises an error' do
-        expect{described_class.from_encoded_json(encoded_json)}.
-          to raise_error(Bankster::BankCredentials::Errors::Invalid)
+        expect { described_class.from_encoded_json(encoded_json) }
+          .to raise_error(Bankster::BankCredentials::Errors::Invalid)
       end
     end
   end

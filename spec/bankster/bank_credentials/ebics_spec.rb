@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'spec_helper'
 
 describe Bankster::BankCredentials::Ebics do
@@ -7,20 +8,20 @@ describe Bankster::BankCredentials::Ebics do
     subject { described_class.new(credential_hash) }
 
     it 'provides public access to the credentials' do
-      expect(subject.type).to eql("ebics")
-      expect(subject.key).to eql("key")
-      expect(subject.passphrase).to eql("passphrase")
-      expect(subject.host_id).to eql("host_id")
-      expect(subject.user_id).to eql("user_id")
-      expect(subject.partner_id).to eql("partner_id")
-      expect(subject.url).to eql("url")
+      expect(subject.type).to eql('ebics')
+      expect(subject.key).to eql('key')
+      expect(subject.passphrase).to eql('passphrase')
+      expect(subject.host_id).to eql('host_id')
+      expect(subject.user_id).to eql('user_id')
+      expect(subject.partner_id).to eql('partner_id')
+      expect(subject.url).to eql('https://localhost')
     end
   end
 
   describe '#valid?' do
     it 'returns false when one of the keys is missing' do
       [:key, :passphrase, :user_id, :host_id, :partner_id, :url].each do |key|
-        expect(described_class.new(credential_hash.merge!({key => nil}))).to_not be_valid
+        expect(described_class.new(credential_hash.merge!(key => nil))).to_not be_valid
       end
     end
 
@@ -42,8 +43,8 @@ describe Bankster::BankCredentials::Ebics do
   describe 'validate!' do
     it 'raises an error when one of the keys is missing' do
       [:key, :passphrase, :user_id, :host_id, :partner_id, :url].each do |key|
-        subject = described_class.new(credential_hash.merge!({key => nil}), validate: false)
-        expect{ subject.validate! }.to raise_error(Bankster::BankCredentials::Ebics::Errors::Invalid)
+        subject = described_class.new(credential_hash.merge!(key => nil), validate: false)
+        expect { subject.validate! }.to raise_error(Bankster::BankCredentials::Ebics::Errors::Invalid)
       end
     end
   end

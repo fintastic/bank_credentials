@@ -1,17 +1,18 @@
+# frozen_string_literal: true
 module Bankster
   module BankCredentials
     class Factory
       def self.from_hash(credentials)
-        raise Errors::Invalid if !credentials.is_a?(Hash)
-        raise Errors::Invalid if !credentials.has_key?(:type)
+        raise Errors::Invalid unless credentials.is_a?(Hash)
+        raise Errors::Invalid unless credentials.key?(:type)
 
         class_for_type(credentials[:type]).new(credentials)
       end
 
       def self.from_encoded_json(encoded_json)
-        raise Errors::Invalid if encoded_json.nil? 
-        raise Errors::Invalid if encoded_json.empty? 
-        raise Errors::Invalid if !encoded_json.is_a?(String)
+        raise Errors::Invalid if encoded_json.nil?
+        raise Errors::Invalid if encoded_json.empty?
+        raise Errors::Invalid unless encoded_json.is_a?(String)
 
         credentials = JSON.parse(Base64.urlsafe_decode64(encoded_json), symbolize_names: true)
 

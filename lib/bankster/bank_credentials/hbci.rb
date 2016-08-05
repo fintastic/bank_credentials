@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Bankster
   module BankCredentials
     class Hbci < Base

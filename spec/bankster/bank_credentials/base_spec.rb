@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'spec_helper'
 
 describe Bankster::BankCredentials::Base do
@@ -6,15 +7,15 @@ describe Bankster::BankCredentials::Base do
 
     it 'adds the attribute to the attributes' do
       expect { klass.attribute(:test) }
-      .to change { klass.attributes }
-      .from([]).to([:test])
+        .to change { klass.attributes }
+        .from([]).to([:test])
     end
 
     it 'adds the reader delegator' do
       klass.attribute(:test)
       credentials_instance = klass.new(test: 'test')
       expect(credentials_instance.credentials).to receive(:test).once
-      
+
       credentials_instance.test
     end
 
@@ -22,8 +23,8 @@ describe Bankster::BankCredentials::Base do
       klass.attribute(:test)
       credentials_instance = klass.new(test: 'test')
       expect(credentials_instance.credentials).to receive(:test=).once
-      
-      credentials_instance.test = "asd"
+
+      credentials_instance.test = 'asd'
     end
   end
 

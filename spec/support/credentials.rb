@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 def valid_ebics_credentials
   valid_ebics_credentials_with_type
 end

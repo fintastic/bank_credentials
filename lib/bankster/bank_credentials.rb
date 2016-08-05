@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'bankster/bank_credentials/version'
 
 require 'base64'
@@ -9,10 +10,7 @@ require 'bankster/bank_credentials/base'
 require 'bankster/bank_credentials/hbci'
 require 'bankster/bank_credentials/ebics'
 
-
-
 module Bankster
   module BankCredentials
-
   end
 end

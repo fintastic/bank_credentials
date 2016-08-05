@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Bankster
   module BankCredentials
     class Ebics < Base
@@ -11,7 +12,7 @@ module Bankster
       module Errors
         class Invalid < StandardError
           def to_s
-            "Invalid Ebics credentials"
+            'Invalid Ebics credentials'
           end
         end
 
