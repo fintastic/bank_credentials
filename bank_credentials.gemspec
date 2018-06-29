@@ -2,17 +2,17 @@
 # frozen_string_literal: true
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'bankster/bank_credentials/version'
+require 'bank_credentials/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'bankster-bank_credentials'
-  spec.version       = Bankster::BankCredentials::VERSION
+  spec.name          = 'bank_credentials'
+  spec.version       = BankCredentials::VERSION
   spec.authors       = ['Roman Lehnert']
-  spec.email         = ['roman.lehnert@googlemail.com']
+  spec.email         = ['roman.lehnert@gmail.com']
 
   spec.summary       = 'A tiny ruby container for ebics and hbci credentials.'
   spec.description   = 'Encapsulates and validates the completeness of banking credentials for ebics and hbci.'
-  spec.homepage      = 'https://github.com/bankster/bankster-bank_credentials'
+  spec.homepage      = 'https://github.com/xxxxxxxxxxxxxbank_credentials'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files -z`.split("\x0")

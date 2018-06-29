@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require 'spec_helper'
 
-describe Bankster::BankCredentials::Hbci do
+describe BankCredentials::Hbci do
   let(:credential_hash) { valid_hbci_credentials_without_type }
 
   describe 'attribute readers' do
@@ -31,7 +31,7 @@ describe Bankster::BankCredentials::Hbci do
     it 'raises an error when one of the keys is missing' do
       [:url, :bank_code, :user_id, :pin].each do |key|
         subject = described_class.new(credential_hash.merge!(key => nil), validate: false)
-        expect { subject.validate! }.to raise_error(Bankster::BankCredentials::Hbci::Errors::Invalid)
+        expect { subject.validate! }.to raise_error(BankCredentials::Hbci::Errors::Invalid)
       end
     end
   end

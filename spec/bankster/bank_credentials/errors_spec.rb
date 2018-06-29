@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require 'spec_helper'
 
-describe Bankster::BankCredentials::Errors::Base do
+describe BankCredentials::Errors::Base do
   it 'has a message when given a message' do
     expect do
       raise described_class, 'oh no!'

@@ -1,19 +1,19 @@
-# Bankster::BankCredentials
+# BankCredentials
 
-Bankster::BankCredentials is a tiny wrapper for keeping together bank credentials for HBCI or Ebics. 
+BankCredentials is a tiny wrapper for keeping together bank credentials for HBCI or Ebics. 
 
 - [Installation](#installation)
 - [Usage with Ebics credentials](#ebics-credentials)
 - [Usage with Hbci credentials](#hbci-credentials)
 
-[![Build Status](https://travis-ci.org/bankster/bankster-bank_credentials.svg?branch=master)](https://travis-ci.org/bankster/bankster-bank_credentials)
+[![Build Status](https://travis-ci.org/bank_credentials.svg?branch=master)](https://travis-ci.org/bank_credentials)
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'bankster-bank_credentials'
+gem 'bank_credentials'
 ```
 
 And then execute:
@@ -22,7 +22,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install bankster-bank_credentials
+    $ gem install bank_credentials
 
 ## Usage
 
@@ -37,7 +37,7 @@ Ebics credentials require the following attributes:
 * Passphrase
 
 #### Feeding with credentials hash
-Take a credentials hash and initialize an `Bankster::BankCredentials::Ebics` instance with it. 
+Take a credentials hash and initialize an `BankCredentials::Ebics` instance with it. 
 ```ruby
 credential_hash = {
   key:        "key",
@@ -48,9 +48,9 @@ credential_hash = {
   passphrase: "passphrase",
 }
 
-credentials = Bankster::BankCredentials::Ebics.new(credential_hash)
+credentials = BankCredentials::Ebics.new(credential_hash)
 ```
-At initialization, the completeness of the attributes will be validated. If they are invalid, `Bankster::BankCredentials::Error::Invalid` will be raised. 
+At initialization, the completeness of the attributes will be validated. If they are invalid, `BankCredentials::Error::Invalid` will be raised. 
 
 
 #### Feeding with a base64 encoded json hash
@@ -67,9 +67,9 @@ credential_hash = {
 
 encoded_json = Base64.decode64(credential_hash.to_json)
 
-credentials = Bankster::BankCredentials::Ebics.from_encoded_json(encoded_json)
+credentials = BankCredentials::Ebics.from_encoded_json(encoded_json)
 ```
-When the given argument is not valid json, `Bankster::BankCredentials::Errors::Invalid` will be raised.
+When the given argument is not valid json, `BankCredentials::Errors::Invalid` will be raised.
 
 Attribute accessors are provided:
 ```ruby
@@ -91,7 +91,7 @@ Ebics credentials require the following attributes:
 * pin
 
 #### Feeding with credentials hash
-Take a credentials hash and initialize an `Bankster::BankCredentials::Hbci` instance with it. 
+Take a credentials hash and initialize an `BankCredentials::Hbci` instance with it. 
 ```ruby
 credential_hash = {
   url:        "url",
@@ -100,9 +100,9 @@ credential_hash = {
   pin:        "pin"
 }
 
-credentials = Bankster::BankCredentials::Hbci.new(credential_hash)
+credentials = BankCredentials::Hbci.new(credential_hash)
 ```
-At initialization, the completeness of the attributes will be validated. If they are invalid, `Bankster::BankCredentials::Error::Invalid` will be raised. 
+At initialization, the completeness of the attributes will be validated. If they are invalid, `BankCredentials::Error::Invalid` will be raised. 
 
 
 #### Feeding with a base64 encoded json hash
@@ -117,9 +117,9 @@ credential_hash = {
 
 encoded_json = Base64.decode64(credential_hash.to_json)
 
-credentials = Bankster::BankCredentials::Hbci.from_encoded_json(encoded_json)
+credentials = BankCredentials::Hbci.from_encoded_json(encoded_json)
 ```
-When the given argument is not valid json, `Bankster::BankCredentials::Errors::Invalid` will be raised.
+When the given argument is not valid json, `BankCredentials::Errors::Invalid` will be raised.
 
 Attribute accessors are provided:
 ```ruby
@@ -134,7 +134,7 @@ After checking out the repo, run `bin/setup` to install dependencies. Then, run 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/bankster/bankster-bank_credentials.
+Bug reports and pull requests are welcome on GitHub at https://github.com/bank_credentials.
 
 
 ## License

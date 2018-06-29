@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require 'spec_helper'
 
-describe Bankster::BankCredentials::Base do
+describe BankCredentials::Base do
   describe '.attribute' do
     let(:klass) { Class.new(described_class) }
 

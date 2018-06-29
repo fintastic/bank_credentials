@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require 'spec_helper'
 
-describe Bankster::BankCredentials::Ebics do
+describe BankCredentials::Ebics do
   let(:credential_hash) { valid_ebics_credentials_without_type }
 
   describe 'attribute readers' do
@@ -44,7 +44,7 @@ describe Bankster::BankCredentials::Ebics do
     it 'raises an error when one of the keys is missing' do
       [:key, :passphrase, :user_id, :host_id, :partner_id, :url].each do |key|
         subject = described_class.new(credential_hash.merge!(key => nil), validate: false)
-        expect { subject.validate! }.to raise_error(Bankster::BankCredentials::Ebics::Errors::Invalid)
+        expect { subject.validate! }.to raise_error(BankCredentials::Ebics::Errors::Invalid)
       end
     end
   end
