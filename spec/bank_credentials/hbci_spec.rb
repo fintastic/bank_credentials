@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'spec_helper'
 
 describe BankCredentials::Hbci do
@@ -17,7 +18,7 @@ describe BankCredentials::Hbci do
 
   describe '#valid?' do
     it 'returns false when one of the keys is missing' do
-      [:url, :bank_code, :user_id, :pin].each do |key|
+      %i[url bank_code user_id pin].each do |key|
         expect(described_class.new(credential_hash.merge!(key => nil))).to_not be_valid
       end
     end
@@ -29,7 +30,7 @@ describe BankCredentials::Hbci do
 
   describe 'validate!' do
     it 'raises an error when one of the keys is missing' do
-      [:url, :bank_code, :user_id, :pin].each do |key|
+      %i[url bank_code user_id pin].each do |key|
         subject = described_class.new(credential_hash.merge!(key => nil), validate: false)
         expect { subject.validate! }.to raise_error(BankCredentials::Hbci::Errors::Invalid)
       end

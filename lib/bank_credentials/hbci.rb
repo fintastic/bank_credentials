@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module BankCredentials
   class Hbci < Base
     module Errors

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module BankCredentials
   class Factory
     def self.from_hash(credentials)
@@ -16,7 +17,6 @@ module BankCredentials
       credentials = JSON.parse(Base64.urlsafe_decode64(encoded_json), symbolize_names: true)
 
       class_for_type(credentials[:type]).new(credentials)
-
     rescue JSON::ParserError, ArgumentError
       raise Errors::Invalid
     end

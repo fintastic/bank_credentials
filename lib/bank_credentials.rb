@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'bank_credentials/version'
 
 require 'base64'

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'spec_helper'
 
 describe BankCredentials::Ebics do
@@ -20,7 +21,7 @@ describe BankCredentials::Ebics do
 
   describe '#valid?' do
     it 'returns false when one of the keys is missing' do
-      [:key, :passphrase, :user_id, :host_id, :partner_id, :url].each do |key|
+      %i[key passphrase user_id host_id partner_id url].each do |key|
         expect(described_class.new(credential_hash.merge!(key => nil))).to_not be_valid
       end
     end
@@ -42,7 +43,7 @@ describe BankCredentials::Ebics do
 
   describe 'validate!' do
     it 'raises an error when one of the keys is missing' do
-      [:key, :passphrase, :user_id, :host_id, :partner_id, :url].each do |key|
+      %i[key passphrase user_id host_id partner_id url].each do |key|
         subject = described_class.new(credential_hash.merge!(key => nil), validate: false)
         expect { subject.validate! }.to raise_error(BankCredentials::Ebics::Errors::Invalid)
       end
