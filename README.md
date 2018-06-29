@@ -7,6 +7,7 @@ BankCredentials is a tiny wrapper for keeping together bank credentials for HBCI
 - [Usage with Hbci credentials](#hbci-credentials)
 
 [![Build Status](https://travis-ci.org/fintastic/bank_credentials.svg?branch=master)](https://travis-ci.org/fintastic/bank_credentials)
+[![Depfu](https://badges.depfu.com/badges/cbc516a00ed7e4ff91cfdf72d4644805/count.svg)](https://depfu.com/github/fintastic/bank_credentials?project=Bundler)
 
 ## Installation
 
