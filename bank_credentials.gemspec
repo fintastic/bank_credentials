@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = 'A tiny ruby container for ebics and hbci credentials.'
   spec.description   = 'Encapsulates and validates the completeness of banking credentials for ebics and hbci.'
-  spec.homepage      = 'https://github.com/xxxxxxxxxxxxxbank_credentials'
+  spec.homepage      = 'https://github.com/fintastic/bank_credentials'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files -z`.split("\x0")
