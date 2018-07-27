@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+require 'open-uri'
+require 'json'
+
 module BankCredentials
   class Hbci < Base
     module Errors
@@ -14,11 +17,38 @@ module BankCredentials
           'Empty Hbci credentials'
         end
       end
+
+      class Config < StandardError
+      end
     end
+
+    BANK_LIST_URL = 'https://raw.githubusercontent.com/jhermsmeier/fints-institute-db/master/fints-institutes.json'
 
     attribute :url
     attribute :bank_code
     attribute :user_id
     attribute :pin
+
+    def initialize(credential_hash, options = {})
+      super
+      @bank_list = nil
+      @credentials[:url] = bank['pinTanURL'] unless @credentials[:url]
+    end
+
+    def bank
+      bank = bank_list.find { |b| b['blz'] == bank_code }
+      raise Errors::Config, "Bank \"#{bank_code}\" not found in bank list" unless bank
+      bank
+    end
+
+    private
+
+    def bank_list
+      OpenURI.open_uri(BANK_LIST_URL) { |f| @bank_list = JSON.parse(f.read) } unless @bank_list
+      raise Errors::Config, 'Bank list is empty' if @bank_list.empty?
+      @bank_list
+    rescue OpenURI::HTTPError
+      raise Errors::Config, 'Bank list not loadable'
+    end
   end
 end
