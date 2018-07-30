@@ -22,7 +22,7 @@ module BankCredentials
       end
     end
 
-    BANK_LIST_URL = 'https://raw.githubusercontent.com/jhermsmeier/fints-institute-db/master/fints-institutes.json'
+    BANK_LIST = File.join(File.dirname(__FILE__), '../bank_list.json')
 
     attribute :url
     attribute :bank_code
@@ -44,7 +44,7 @@ module BankCredentials
     private
 
     def bank_list
-      OpenURI.open_uri(BANK_LIST_URL) { |f| @bank_list = JSON.parse(f.read) } unless @bank_list
+      File.open(BANK_LIST, 'r') { |f| @bank_list = JSON.parse(f.read) } unless @bank_list
       raise Errors::Config, 'Bank list is empty' if @bank_list.empty?
       @bank_list
     rescue OpenURI::HTTPError
