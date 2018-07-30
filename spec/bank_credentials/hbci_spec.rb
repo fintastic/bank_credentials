@@ -5,16 +5,6 @@ require 'spec_helper'
 describe BankCredentials::Hbci do
   let(:credential_hash) { valid_hbci_credentials_without_type }
 
-  let(:response_stub) do
-    [
-      { "blz": '10020890', "pinTanURL": 'https://hbci-01.hypovereinsbank.de/bank/hbci' }
-    ].to_json
-  end
-
-  before do
-    stub_request(:get, 'https://raw.githubusercontent.com/jhermsmeier/fints-institute-db/master/fints-institutes.json').to_return(body: response_stub)
-  end
-
   describe 'attribute readers' do
     subject { described_class.new(credential_hash) }
 
@@ -40,30 +30,6 @@ describe BankCredentials::Hbci do
     context 'with valid bank list' do
       it 'returns endpoint url' do
         expect(subject.url).to eql('https://hbci-01.hypovereinsbank.de/bank/hbci')
-      end
-    end
-
-    context 'with empty bank list' do
-      let(:response_stub) do
-        [].to_json
-      end
-
-      before do
-        stub_request(:get, 'https://raw.githubusercontent.com/jhermsmeier/fints-institute-db/master/fints-institutes.json').to_return(body: response_stub)
-      end
-
-      it 'raise an error' do
-        expect { subject.url }.to raise_error(BankCredentials::Hbci::Errors::Config, 'Bank list is empty')
-      end
-    end
-
-    context 'when bank list url is not reachable' do
-      before do
-        stub_request(:get, 'https://raw.githubusercontent.com/jhermsmeier/fints-institute-db/master/fints-institutes.json').to_return(status: 400)
-      end
-
-      it 'raise an error' do
-        expect { subject.url }.to raise_error(BankCredentials::Hbci::Errors::Config, 'Bank list not loadable')
       end
     end
   end
